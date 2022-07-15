@@ -14,15 +14,33 @@
  * }
  */
 class Solution {
-    
-    public List<Integer>list= new ArrayList<>();
-    
     public List<Integer> preorderTraversal(TreeNode root) {
-        if(root!=null)
+        List<Integer>list= new ArrayList<>();
+        Stack<TreeNode>st= new Stack<>();
+        if(root==null)
         {
-            list.add(root.val);
-            preorderTraversal(root.left);
-            preorderTraversal(root.right);
+            return list;
+        }
+        
+        TreeNode curr=root;
+        
+        //iterative solution we only push the right childes, we process the curr node we print it, then we add the right child of that that to stack and call for its left child.
+        
+        while(curr!=null || !st.isEmpty())
+        {
+            while(curr!=null)
+            {
+                list.add(curr.val);
+                if(curr.right!=null)
+                {
+                    st.push(curr.right);
+                }
+                curr=curr.left;
+            }
+            if(!st.isEmpty())
+            {
+                curr=st.pop();
+            }
         }
         return list;
     }
