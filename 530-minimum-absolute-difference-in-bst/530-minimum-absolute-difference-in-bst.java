@@ -14,22 +14,20 @@
  * }
  */
 class Solution {
-    List<Integer>list= new ArrayList<>();
+    TreeNode prev=null;
+    int ans=Integer.MAX_VALUE;
     public int getMinimumDifference(TreeNode root) {
         if(root!=null)
         {
             getMinimumDifference(root.left);
-            list.add(root.val);
+            if(prev!=null)
+            {
+                ans=Math.min(ans, Math.abs(root.val-prev.val));
+            }
+            prev=root;
              getMinimumDifference(root.right);
         }
         
-        int min=Integer.MAX_VALUE;
-        
-        for(int i=1; i<list.size(); i++)
-        {
-            int diff=Math.abs(list.get(i)-list.get(i-1));
-            min=Math.min(min, diff);
-        }
-        return min;
+       return ans;
     }
 }
