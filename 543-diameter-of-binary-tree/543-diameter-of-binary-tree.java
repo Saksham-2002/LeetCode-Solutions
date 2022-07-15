@@ -17,6 +17,7 @@ class Solution {
     int result=0;
     public int height(TreeNode root)
     {
+        //we just have to find max of leftheight+rightheight of all nodes and return that max
         if(root==null)
         {
             return 0;
