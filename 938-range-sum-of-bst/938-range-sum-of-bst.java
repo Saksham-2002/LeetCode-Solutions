@@ -29,8 +29,8 @@ class Solution {
         if(root.val>=low && root.val<=high)
         {
             sum+=root.val;
-          helper(root.left, low, root.val);
-          helper(root.right, root.val, high);
+          helper(root.left, low, high);
+          helper(root.right, low, high);
         }
         else if(root.val<low)
         {
