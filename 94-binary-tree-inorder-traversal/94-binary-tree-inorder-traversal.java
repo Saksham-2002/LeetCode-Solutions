@@ -14,14 +14,29 @@
  * }
  */
 class Solution {
-    List<Integer>list= new ArrayList<>();
-    
     public List<Integer> inorderTraversal(TreeNode root) {
-        if(root!=null)
+        List<Integer>list= new ArrayList<>();
+        if(root==null)
         {
-            inorderTraversal(root.left);
-            list.add(root.val);
-            inorderTraversal(root.right);
+            return list;
+        }
+        
+        
+      //we are using a stack here because we need to process the right child of every node, we push all the let node in stack then pop it and print it and then add the right child of the same node.
+        
+        Stack<TreeNode>st= new Stack<>();
+         TreeNode curr=root;
+        
+        while(curr!=null || !st.isEmpty())
+        {
+            while(curr!=null)
+            {
+                st.push(curr);
+                curr=curr.left;
+            }
+            curr=st.pop();
+            list.add(curr.val);
+            curr=curr.right;
         }
         return list;
     }
