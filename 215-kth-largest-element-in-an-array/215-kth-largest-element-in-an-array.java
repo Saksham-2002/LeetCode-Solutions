@@ -5,12 +5,12 @@ class Solution {
         for(int val:nums)
         {
             pq.add(val);
+            
+            if(pq.size()>k)
+            {
+                pq.poll();
+            }
         }
-        
-        while(pq.size()!=k)
-        {
-            pq.poll();
-        }
-        return pq.peek();
+          return pq.peek();
     }
 }
