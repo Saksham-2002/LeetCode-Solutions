@@ -14,19 +14,20 @@
  * }
  */
 class Solution {
+    int c=1; int ans=0;
     public int kthSmallest(TreeNode root, int k) {
-        List<Integer>list=Inorder(root);
-        return list.get(k-1);
+        if(root==null)
+        {
+            return ans;
+        }
+        
+        kthSmallest(root.left, k);
+        if(c==k)
+        {
+            ans=root.val;
+        }
+        c++;
+        kthSmallest(root.right, k);
+            return ans;
     }
-     List<Integer>list= new ArrayList<>();
-    public List<Integer> Inorder(TreeNode root)
-   {
-       if(root!=null)
-       {
-       Inorder(root.left);
-       list.add(root.val);
-       Inorder(root.right);
-       }
-        return list;
-   }
 }
