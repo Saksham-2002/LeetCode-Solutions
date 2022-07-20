@@ -20,14 +20,23 @@ class Solution {
         {
             return;
         }
-        
-        flatten(root.right);
-        flatten(root.left);
-        
-        root.right=prev;
-        root.left=null;
-        
-        prev=root;
+         while(root!=null)
+         {
+             if(root.left!=null)
+             {
+                 TreeNode left=root.left;
+                 TreeNode curr=left;
+                 
+                 while(curr.right!=null)
+                 {
+                     curr=curr.right;
+                 }
+                 curr.right=root.right;
+                 root.right=left;
+                  root.left=null;
+             }
+             root=root.right;
+         }
         
     }
 }
