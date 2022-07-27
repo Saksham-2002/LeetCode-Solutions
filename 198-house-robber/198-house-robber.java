@@ -1,18 +1,25 @@
 class Solution {
     public int rob(int[] nums) {
         
-        int include=nums[0];
-        int exclude=0;
-        
-        for(int i=1; i<nums.length; i++)
+        if(nums.length==1)
         {
-            int newinclude=exclude+nums[i];
-            int newexclude=Math.max(include, exclude);
-            
-            include=newinclude;
-            exclude=newexclude;
+            return nums[0];
         }
-        int result=Math.max(include, exclude);
-        return result;
+        if(nums.length==2)
+        {
+            return Math.max(nums[0], nums[1]);
+        }
+        
+        int dp[]= new int[nums.length];
+        
+        dp[0]=nums[0];
+        dp[1]=Math.max(nums[0], nums[1]);
+        
+        for(int i=2; i<dp.length; i++)
+        {
+            dp[i]=Math.max(dp[i-1], dp[i-2]+nums[i]);
+        }
+        
+        return dp[dp.length-1];
     }
 }
