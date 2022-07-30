@@ -1,44 +1,23 @@
 class Solution {
     public int lengthOfLIS(int[] nums) {
         
-        //Using Binary Serach
-        // TC=nlogn.
-        int tail[]= new int[nums.length];
-        int length=1;
+        int dp[]= new int[nums.length];
         
-        tail[0]=nums[0];
-        
-        for(int i=1; i<nums.length; i++)
+        int omax=0;
+        for(int i=0; i<nums.length; i++)
         {
-            if(nums[i]>tail[length-1])
+            int max=0;
+            
+            for(int j=0; j<i; j++)
             {
-                tail[length]=nums[i];
-                length++;
+                if(nums[j]<nums[i])
+                {
+                    max=Math.max(max, dp[j]);
+                }
             }
-            else
-            {
-                int c=FindCeil(tail, 0, length-1, nums[i]);
-                tail[c]=nums[i];
-            }
+            dp[i]=max+1;
+            omax=Math.max(omax, dp[i]);
         }
-        return length;
-        
-    }
-    public int FindCeil(int tail[], int low, int high, int value)
-    {
-         while(low<high)
-         {
-             int mid=(low+high)/2;
-             
-             if(tail[mid]>=value)
-             {
-                 high=mid;
-             }
-             else
-             {
-                 low=mid+1;
-             }
-         }
-        return high;
+        return omax;
     }
 }
